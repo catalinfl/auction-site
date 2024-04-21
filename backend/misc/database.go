@@ -25,7 +25,12 @@ func ConnectDB() {
 		http.Error(nil, "Failed to connect to database", http.StatusInternalServerError)
 	}
 
-	db.AutoMigrate(&models.Auction{}, &models.Category{}, &models.User{})
+	err = db.AutoMigrate(&models.Category{}, &models.User{}, &models.Auction{})
+
+	if err != nil {
+		http.Error(nil, "Failed to migrate database", http.StatusInternalServerError)
+		return
+	}
 
 	Database = db
 
