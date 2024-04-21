@@ -11,6 +11,8 @@ func AuctionRoutes() *chi.Mux {
 
 	auctionRouter.Get("/", handlers.GetAllAuctions)
 	auctionRouter.Get("/{id}", handlers.GetAuction)
+	auctionRouter.Put("/{id}", handlers.ModifyPrice)
+	auctionRouter.Post("/", handlers.CreateAuction)
 
 	return auctionRouter
 }

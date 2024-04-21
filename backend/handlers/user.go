@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/catalinfl/auction-site/misc"
@@ -11,26 +12,26 @@ import (
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
 
-	// getJwt, err := r.Cookie("token")
+	getJwt, err := r.Cookie("token")
 
-	// fmt.Println(getJwt)
+	fmt.Println(getJwt)
 
-	// if err != nil {
-	// 	http.Error(w, "No JWT cookie", http.StatusBadRequest)
-	// 	return
-	// }
+	if err != nil {
+		http.Error(w, "No JWT cookie", http.StatusBadRequest)
+		return
+	}
 
-	// claims, err := VerifyToken(getJwt.Value)
+	claims, err := VerifyToken(getJwt.Value)
 
-	// if err != nil {
-	// 	http.Error(w, "Invalid JWT", http.StatusBadRequest)
-	// 	return
-	// }
+	if err != nil {
+		http.Error(w, "Invalid JWT", http.StatusBadRequest)
+		return
+	}
 
-	// if claims == "" {
-	// 	http.Error(w, "Invalid JWT", http.StatusBadRequest)
-	// 	return
-	// }
+	if claims == "" {
+		http.Error(w, "Invalid JWT", http.StatusBadRequest)
+		return
+	}
 
 	id := chi.URLParam(r, "id")
 
@@ -41,7 +42,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	var user models.User
 
-	err := misc.Database.Where("id = ?", id).First(&user).Error
+	err = misc.Database.Where("id = ?", id).First(&user).Error
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

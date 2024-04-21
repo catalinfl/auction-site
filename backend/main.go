@@ -23,6 +23,7 @@ func main() {
 	r.Route("/api", func(r chi.Router) {
 		r.Mount("/user", routes.UserRoutes())
 		r.Mount("/auction", routes.AuctionRoutes())
+		r.Mount("/category", routes.CategoryRoutes())
 	})
 
 	http.ListenAndServe(":8080", r)
