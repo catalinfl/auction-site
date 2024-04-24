@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className="flex p-2 font-extralight items-center justify-center md:justify-start bg-primary text-white">
         <div className="hidden md:flex">
             <Link to="/">
-                <p className="text-2xl font-bold cursor-pointer"> AuctionsHere </p>
+                <p className="text-2xl font-bold cursor-pointer lg:pl-12"> AuctionsHere </p>
             </Link>
         </div>
         <div className="flex items-center flex-row w-full justify-center gap-4 bg-primary">

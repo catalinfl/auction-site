@@ -6,11 +6,12 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Sign from './pages/Sign.tsx'
 import Auctions from './pages/Auctions.tsx'
 import ThemeWrapper from './utils/themewrapper.tsx'
+import Home from './pages/Home.tsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Home />,
   },
   {
     path: '/sign',

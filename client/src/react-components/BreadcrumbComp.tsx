@@ -12,7 +12,7 @@ import { Home } from "lucide-react";
 
 const BreadcrumbComp = () => {
   return (
-  <Breadcrumb className="w-full max-w-sm mx-auto lg:mx-0 md:max-w-xl lg:max-w-4xl xl:max-w-7xl rounded-sm border p-2 my-3">
+  <Breadcrumb className="w-full max-w-sm mx-auto lg:mx-0 md:max-w-xl lg:max-w-4xl xl:max-w-7xl rounded-sm p-2 my-3">
     <BreadcrumbList> 
       <BreadcrumbItem>
       <Link to="/">
