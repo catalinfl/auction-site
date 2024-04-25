@@ -7,6 +7,8 @@ import Sign from './pages/Sign.tsx'
 import Auctions from './pages/Auctions.tsx'
 import ThemeWrapper from './utils/themewrapper.tsx'
 import Home from './pages/Home.tsx'
+import AuctionSearch from './pages/AuctionSearch.tsx'
+import SingleAuction from './pages/SingleAuction.tsx'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: '/auctions',
     element: <Auctions />
+  },
+  {
+    path: '/auctions/search',
+    element: <AuctionSearch />
+  },
+  {
+    path: '/auction/:id',
+    element: <SingleAuction />
   }
 ])
 

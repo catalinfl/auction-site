@@ -8,7 +8,7 @@ const Footer = ({ isHeightBigger }: FooterProps) => {
 
     if (!isHeightBigger) {
         return (
-            <div className="flex justify-center w-full items-center bg-primary text-white h-12">
+            <div className="flex mt-4 justify-center w-full items-center bg-primary text-white h-12">
                 <p> &copy; 2024 Catalin Flintasu. All rights reserved. </p>
             </div>
         )
