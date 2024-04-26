@@ -10,7 +10,7 @@ const AuctionSearch = () => {
     <>
         <Navbar />
           <div className="w-full max-w-7xl mx-auto">
-              <BreadcrumbComp search/>
+              <BreadcrumbComp search auction={false}/>
           </div>
           <div className="lg:grid lg:grid-cols-5">
               <Settings />

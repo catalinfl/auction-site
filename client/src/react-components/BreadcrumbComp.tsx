@@ -13,9 +13,10 @@ import { Search } from "lucide-react";
 
 interface BreadcrumbComp {
   search: boolean
+  auction: string | false
 }
 
-const BreadcrumbComp = ({search}: BreadcrumbComp) => {
+const BreadcrumbComp = ({search, auction}: BreadcrumbComp) => {
   return (
   <Breadcrumb className="w-full content-center self-center max-w-sm mx-auto lg:mx-0 md:max-w-xl lg:max-w-4xl xl:max-w-7xl rounded-sm p-2 my-3">
     <BreadcrumbList> 
@@ -31,7 +32,7 @@ const BreadcrumbComp = ({search}: BreadcrumbComp) => {
         <div className="flex flex-row gap-2 items-center">
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="justify-center items-center text-black flex gap-2"><RiAuctionLine size="18"/> Auctions</BreadcrumbPage>
+          <BreadcrumbPage className={`${auction ? "text-grey" : "text-black"} justify-center items-center flex gap-2`}><RiAuctionLine size="18"/> Auctions</BreadcrumbPage>
         </BreadcrumbItem>
       </div>
       </Link>
@@ -41,7 +42,7 @@ const BreadcrumbComp = ({search}: BreadcrumbComp) => {
         <div className="flex flex-row gap-2 items-center">
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage className="justify-center items-center text-[gray] flex gap-2"><RiAuctionLine size="18"/> Auctions</BreadcrumbPage>
+          <BreadcrumbPage className="justify-center items-center text-grey flex gap-2"><RiAuctionLine size="18"/> Auctions</BreadcrumbPage>
         </BreadcrumbItem>
       </div>
       </Link>
@@ -52,6 +53,18 @@ const BreadcrumbComp = ({search}: BreadcrumbComp) => {
         </BreadcrumbItem>
       </div>
       </>
+      }
+      {
+        auction ?
+        <>
+        <div className="flex flex-row gap-2 items-center">
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage className="justify-center items-center text-black flex gap-2"><RiAuctionLine size="18"/> {auction}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </div>
+      </>
+      : <></>
       }
   </BreadcrumbList>
   </Breadcrumb>
