@@ -9,7 +9,7 @@ const AuctionInfo = () => {
         <div className="max-w-5xl col-span-3 flex flex-row justify-center items-center w-full bg-white">
                 <MoveLeft className="cursor-pointer text-white bg-primary p-3 rounded-md" size="50" />
                 <div className="w-full cursor-pointer">
-                    <img src={Search} />
+                    <img className="selection:bg-transparent" src={Search} />
                 </div>
                 <MoveRight className="cursor-pointer text-white bg-primary p-3 rounded-md" size="50" />
         </div>

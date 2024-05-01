@@ -14,6 +14,7 @@ import { Search } from "lucide-react";
 interface BreadcrumbComp {
   search: boolean
   auction: string | false
+  home: boolean
 }
 
 const BreadcrumbComp = ({search, auction}: BreadcrumbComp) => {
@@ -28,14 +29,15 @@ const BreadcrumbComp = ({search, auction}: BreadcrumbComp) => {
       </div>
       </Link>
       { !search ?
-       <Link to="/auctions">
-        <div className="flex flex-row gap-2 items-center">
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage className={`${auction ? "text-grey" : "text-black"} justify-center items-center flex gap-2`}><RiAuctionLine size="18"/> Auctions</BreadcrumbPage>
-        </BreadcrumbItem>
-      </div>
-      </Link>
+      //  <Link to="/auctions">
+      //   <div className="flex flex-row gap-2 items-center">
+      //   <BreadcrumbSeparator />
+      //   <BreadcrumbItem>
+      //     <BreadcrumbPage className={`${auction ? "text-grey" : "text-black"} justify-center items-center flex gap-2`}><RiAuctionLine size="18"/> Auctions</BreadcrumbPage>
+      //   </BreadcrumbItem>
+      // </div>
+      // </Link>
+      <></>
       : <>
       
       <Link to="/auctions">

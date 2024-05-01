@@ -33,4 +33,8 @@ type Auction struct {
 	Images      pq.StringArray `json:"image" gorm:"type:text[]"`
 	CategoryID  uint           `json:"category_id"`
 	UserID      uint           `json:"user_id"`
+	Promoted    bool           `json:"promoted"`
+	Started     bool           `json:"started"`
+	Finished    bool           `json:"finished"`
+	FinishAt    string         `json:"finish_at"`
 }

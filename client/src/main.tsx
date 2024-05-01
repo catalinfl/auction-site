@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Sign from './pages/Sign.tsx'
@@ -9,6 +8,8 @@ import ThemeWrapper from './utils/themewrapper.tsx'
 import Home from './pages/Home.tsx'
 import AuctionSearch from './pages/AuctionSearch.tsx'
 import SingleAuction from './pages/SingleAuction.tsx'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeWrapper>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={new QueryClient()}>
+       <RouterProvider router={router} />
+      </QueryClientProvider>
     </ThemeWrapper>
   </React.StrictMode>,
 )

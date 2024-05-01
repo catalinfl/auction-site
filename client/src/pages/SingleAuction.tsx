@@ -9,7 +9,7 @@ const SingleAuction = () => {
     <>
         <Navbar />
         <div className="w-full max-w-7xl mx-auto">
-              <BreadcrumbComp search={false} auction={"Auction name"}/>
+              <BreadcrumbComp home={true} search={false} auction={"Auction name"}/>
         </div>
         <AuctionInfo />
         <Footer isHeightBigger={false} />
