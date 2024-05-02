@@ -88,11 +88,9 @@ export default function SignCard({ isRegister }: SignCardProps) {
     .catch((err) => console.log(err))
     ,
     onMutate: () => console.log("User login in progress"),
-    onSuccess: () => console.log("User logged in successfully"),
+    onSuccess: () => window.location.href = "/auctions",
     onError: () => console.log("User login failed")
   })
-
-  
 
 
   return (

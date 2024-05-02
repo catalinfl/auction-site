@@ -64,7 +64,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HttpOnly: true,
-		SameSite: http.SameSiteStrictMode,
+		SameSite: http.SameSiteNoneMode,
 	}
 
 	http.SetCookie(w, cookie)
@@ -75,13 +75,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 func CreateToken(username string) (string, error) {
 
-	claims := jwt.RegisteredClaims{
-		ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
-		Issuer:    "login-auth",
-		Subject:   username,
-	}
+	token := jwt.New(jwt.SigningMethodHS256)
 
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	claims := token.Claims.(jwt.MapClaims)
+
+	claims["sub"] = username
+	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
 	godotenv.Load()
 
