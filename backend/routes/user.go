@@ -11,6 +11,7 @@ func UserRoutes() *chi.Mux {
 
 	userRouter.Post("/register", handlers.Register)
 	userRouter.Post("/login", handlers.Login)
+	userRouter.Get("/verify", handlers.VerifyIsLoggedIn)
 
 	userRouter.Get("/{id}", handlers.GetUser)
 

@@ -62,15 +62,35 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	cookie := &http.Cookie{
 		Name:     "token",
 		Value:    token,
-		Expires:  time.Now().Add(time.Hour * 24),
+		Expires:  time.Now().Add(24 * time.Hour),
 		HttpOnly: true,
-		SameSite: http.SameSiteNoneMode,
+		Path:     "/",
 	}
 
 	http.SetCookie(w, cookie)
 
-	w.Write([]byte("Logged in"))
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{"username": user.Username})
+}
 
+func VerifyIsLoggedIn(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("token")
+
+	if err != nil {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	username, err := VerifyToken(cookie.Value)
+
+	if err != nil {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+
+	json.NewEncoder(w).Encode(map[string]string{"username": username})
 }
 
 func CreateToken(username string) (string, error) {
@@ -80,7 +100,6 @@ func CreateToken(username string) (string, error) {
 	claims := token.Claims.(jwt.MapClaims)
 
 	claims["sub"] = username
-	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
 	godotenv.Load()
 

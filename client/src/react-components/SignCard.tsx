@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useMutation } from "@tanstack/react-query"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { ChangeEvent, useEffect, useState } from "react"
 
 interface SignCardProps {
@@ -67,11 +67,26 @@ export default function SignCard({ isRegister }: SignCardProps) {
   useEffect(() => {
     console.log(signCard)
   })
+
+  const [error, setError] = useState<string>("")
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setError("")
+    
+    }, 5000)
+
+    return () => clearTimeout(timeout)
+
+  }, [error])
+
+
+  console.log(error)
   
   const registerUser = useMutation({
     mutationFn: () => axios.post("http://localhost:8080/api/user/register", JSON.stringify(signCard))
     .then((res) => console.log(res.data))
-    .catch((err) => console.log(err))
+    .catch((err: AxiosError) => setError(err?.response?.data as string))
     ,
     onMutate: () => console.log("User registration in progress"),
     onSuccess: () => console.log("User registered successfully"),
@@ -82,13 +97,30 @@ export default function SignCard({ isRegister }: SignCardProps) {
     console.log(loginCard)
   })
 
+  const verifyToken = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/api/user/verify", { withCredentials: true })
+      localStorage.setItem("name", res.data.username)
+      var date = new Date()
+      date.setDate(date.getDate() + 1)
+      localStorage.setItem("date", date.toISOString())
+    }
+    catch(err) {
+      localStorage.setItem("name", "")
+    }
+  }
+
+
   const loginUser = useMutation({
     mutationFn: () => axios.post("http://localhost:8080/api/user/login", JSON.stringify(loginCard), { withCredentials: true })
-    .then((res) => console.log(res.data))
+    // .then((res) => console.log(res.data))
+    .then(() => verifyToken())
+    .then(() => window.location.href = "/auctions")
     .catch((err) => console.log(err))
+
     ,
     onMutate: () => console.log("User login in progress"),
-    onSuccess: () => window.location.href = "/auctions",
+    onSuccess: () => console.log("User logged in successfully"),
     onError: () => console.log("User login failed")
   })
 
@@ -124,7 +156,7 @@ export default function SignCard({ isRegister }: SignCardProps) {
         </form>
       </CardContent>
       <CardFooter className={`${!isRegister ? "mt-[4.7rem]" : null} flex justify-center`}>
-        <Button onClick={() => isRegister ? registerUser.mutate() : loginUser.mutate()} className="w-32">{isRegister ? "Register" : "Login"}</Button>
+        <Button onClick={() => isRegister ? registerUser.mutate() : loginUser.mutate() } className="w-32">{isRegister ? "Register" : "Login"}</Button>
       </CardFooter>
     </Card>
   )
