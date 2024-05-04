@@ -12,10 +12,13 @@ import { Label } from "@/components/ui/label"
 import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 import { ChangeEvent, useEffect, useState } from "react"
+import { isLoggedIn } from "@/utils/verifyloggedin"
 
 interface SignCardProps {
   isRegister?: boolean
 }
+
+type Error = string
 
 type SignCardType = {
   username: string,
@@ -68,12 +71,11 @@ export default function SignCard({ isRegister }: SignCardProps) {
     console.log(signCard)
   })
 
-  const [error, setError] = useState<string>("")
+  const [error, setError] = useState<Error>("")
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setError("")
-    
     }, 5000)
 
     return () => clearTimeout(timeout)
@@ -86,7 +88,7 @@ export default function SignCard({ isRegister }: SignCardProps) {
   const registerUser = useMutation({
     mutationFn: () => axios.post("http://localhost:8080/api/user/register", JSON.stringify(signCard))
     .then((res) => console.log(res.data))
-    .catch((err: AxiosError) => setError(err?.response?.data as string))
+    .catch((err: AxiosError) => setError(err?.response?.data as Error))
     ,
     onMutate: () => console.log("User registration in progress"),
     onSuccess: () => console.log("User registered successfully"),

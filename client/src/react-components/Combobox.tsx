@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-const frameworks = [
+const category = [
   {
     value: "all",
     label: "All"
@@ -53,7 +53,7 @@ export default function Combobox() {
           className="w-[200px] justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? category.find((category) => category.value === value)?.label
             : "Select category type..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -63,10 +63,10 @@ export default function Combobox() {
           <CommandInput placeholder="Search category type" />
           <CommandEmpty>No category found</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {category.map((category) => (
               <CommandItem
-                key={framework.value}
-                value={framework.value}
+                key={category.value}
+                value={category.value}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue)
                   setOpen(false)
@@ -75,10 +75,10 @@ export default function Combobox() {
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
+                    value === category.value ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {framework.label}
+                {category.label}
               </CommandItem>
             ))}
           </CommandGroup>

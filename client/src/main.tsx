@@ -9,6 +9,8 @@ import Home from './pages/Home.tsx'
 import AuctionSearch from './pages/AuctionSearch.tsx'
 import SingleAuction from './pages/SingleAuction.tsx'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import Profile from './pages/Profile.tsx'
+import CreateAuction from './pages/CreateAuction.tsx'
 
 
 const router = createBrowserRouter([
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
   {
     path: '/sign',
     element: <Sign />
+  },
+  {
+    path: '/profile',
+    element: <Profile />
+  },
+  {
+    path: '/create-auction',
+    element: <CreateAuction />
   },
   {
     path: '/auctions',

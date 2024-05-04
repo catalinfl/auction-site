@@ -1,7 +1,22 @@
 import { Input } from "@/components/ui/input"
+import { isLoggedIn } from "@/utils/verifyloggedin"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
+
+  const [name, setName] = useState<string>("")
+
+  useEffect(() => {
+    const isLoggedInVar = isLoggedIn()
+    const named = localStorage.getItem("name")
+    setName(isLoggedInVar ? named as string : "Login/register")
+  }, [])
+
+  console.log(name)
+
+
+
   return (
     <div className="flex p-2 font-extralight items-center justify-center md:justify-start bg-primary text-white">
         <div className="hidden md:flex">
@@ -14,9 +29,10 @@ const Navbar = () => {
             <Link to="/auctions">
             <p className="cursor-pointer"> Auctions </p>
             </Link>
-            <Link to="/sign">
-            <p className="cursor-pointer"> Login or register </p>
-            </Link>
+            
+           <Link to={name === "Login/register" ? "/sign" : "/profile"}>
+            <p className="cursor-pointer"> {name} </p>
+           </Link>
         </div>
     </div>
   )
