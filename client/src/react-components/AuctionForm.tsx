@@ -43,12 +43,29 @@ function AuctionForm() {
 
 
     function onSubmit(data: any) {
-        console.log(data)
+        const formData = new FormData()
+                
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+        formData.append("price", data.price.toString()); // Ensure price is a string
+        formData.append("category", data.category);
+        formData.append("promoted", data.promoted.toString()); // Convert boolean to string
+        formData.append("date", data.date);
+        
+        data.images.forEach((file: File, index: number) => {
+            const blob = new Blob([file], { type: file.type })
+            formData.append(`images[${index}]`, blob, file.name)
+        })
+
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}:${value}`)
+        }
+        
     }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-md mx-auto my-12 space-y-12">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xs sm:max-w-sm lg:max-w-md mx-auto my-12 space-y-12">
         <FormField
           control={form.control}
           name="title"

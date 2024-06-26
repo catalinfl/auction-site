@@ -8,7 +8,7 @@ const HomeContainer = () => {
     <div className="flex items-center justify-center lg:mt-12">
       <div className="rounded-lg gap-5 lg:flex-row bg-primary h-[600px] flex w-full flex-col items-center max-w-sm lg:mx-0 md:max-w-xl lg:max-w-4xl xl:max-w-7xl mt-3 p-3 text-white mx-auto">
         <div className="flex md:flex-1 justify-around w-full">
-          <h1 className="font-bold text-center w-full text-3xl lg:text-5xl p-3 bg-gradient-to-r from-white to-orange-400 inline-block text-transparent bg-clip-text">
+          <h1 className="font-bold text-center w-full text-3xl lg:text-5xl p-3 text-white inline-block text-transparent">
             <Typewriter
             options={{
               strings: ['Buy in auction a chair', 'Sell something', 'Buy an valuable object',
@@ -25,9 +25,9 @@ const HomeContainer = () => {
             />
             <div className="flex flex-col md:flex-row items-center mt-16 gap-5 mx-auto justify-center w-full">
             <Link to="/auctions">
-              <Button className="w-64 hover:bg-foreground md:mt-16 font-bold bg-white text-primary"> Bid for something </Button>
+              <Button className="w-64 hover:bg-primary hover:border-white hover:border hover:text-white md:mt-16 font-bold bg-white text-primary"> Bid for something </Button>
             </Link>
-            <Button className="w-64 hover:bg-foreground md:mt-16 font-bold bg-white text-primary"> Sell something </Button>
+            <Button className="w-64 hover:bg-primary hover:border-white hover:border hover:text-white md:mt-16 font-bold bg-white text-primary"> Sell something </Button>
             </div>
           </h1>
         </div>
